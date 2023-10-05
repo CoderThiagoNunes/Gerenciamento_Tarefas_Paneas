@@ -1,0 +1,30 @@
+.card_adicionar_tarefa {
+    height: 100%; 
+    box-sizing: border-box;
+}
+
+.inputs_tarefa_vencimento {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.input_tarefa {
+    input {
+        width: 500px;
+        height: auto;
+        font-size: 14px;
+    }
+}
+
+.input_vencimento {
+    display: flex;
+    gap: 1rem;
+}
+
+.botoes_cancelar_confirmar {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}

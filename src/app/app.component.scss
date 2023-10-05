@@ -1,0 +1,11 @@
+:host .container{
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 2fr 6fr 1fr;
+    box-sizing: border-box;
+}
+
+.conteudo_central {
+    overflow: auto
+}
