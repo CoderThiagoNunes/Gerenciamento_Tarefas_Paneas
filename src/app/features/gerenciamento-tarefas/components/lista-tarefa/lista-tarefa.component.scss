@@ -1,6 +1,25 @@
-.tabela_tarefas {
-    table {
-        width: 100%;
-        padding: 2rem;
+.example-container {
+    height: 440px;
+    overflow: auto;
+    box-sizing: border-box;
+}
+
+table {
+    width: 100%;
+}
+
+.loading_e_sem_tarefas {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    
+    img {
+        max-width:200px;
+        max-height:150px;
+        width: auto;
+        height: auto;
     }
 }

@@ -1,32 +1,36 @@
 <mat-card class="card_adicionar_tarefa">
-  <h2>Adicionar uma nova tarefa</h2>
-  <form [formGroup]="formGerenciamentoTarefa">
-    <div class="inputs_tarefa_vencimento">
-      <div class="input_tarefa">
-        <mat-form-field appearance="fill">
-          <mat-label>Descreva uma tarefa: </mat-label>
-          <input 
-            matInput
-            formControlName="tarefa"
-          >
-        </mat-form-field>
-      </div>
-      <div class="input_vencimento">
-        <mat-form-field appearance="fill">
-          <mat-label>Escolha uma data</mat-label>
-          <input 
-            matInput [matDatepicker]="picker"
-            formControlName="vencimento"
-          >
-          <mat-hint>MM/DD/YYYY</mat-hint>
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-      </div>
-    </div>
-    <div class="botoes_cancelar_confirmar">
-      <button mat-raised-button color="warn" (click)="resetarFormulario()">Cancelar</button>
-      <button mat-raised-button color="primary">Confirmar</button>
-    </div>
-  </form>
+    <mat-toolbar color="primary">Adicione uma nova tarefa</mat-toolbar>
+    <form [formGroup]="formGerenciamentoTarefa">
+        <div class="inputs_tarefa_vencimento">
+            <div class="input_tarefa">
+                <mat-form-field appearance="fill">
+                    <mat-label>Descreva uma tarefa: </mat-label>
+                    <input 
+                        matInput
+                        formControlName="descricao"
+                    >
+                </mat-form-field>
+            </div>
+            <div class="input_vencimento_botoes">
+                <div>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Escolha uma data de vencimento</mat-label>
+                        <input 
+                        matInput [matDatepicker]="picker"
+                        formControlName="vencimento"
+                        >
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div>
+                <div class="botoes_cancelar_confirmar">
+                    <button mat-raised-button color="warn" (click)="resetarFormulario()">Cancelar</button>
+                    <button mat-raised-button color="primary" (click)="adicionarTarefa()">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </form>
 </mat-card>

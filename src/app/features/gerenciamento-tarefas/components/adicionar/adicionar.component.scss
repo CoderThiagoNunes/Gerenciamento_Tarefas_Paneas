@@ -1,5 +1,5 @@
 .card_adicionar_tarefa {
-    height: 100%; 
+    height: 440px; 
     box-sizing: border-box;
 }
 
@@ -11,20 +11,26 @@
 }
 
 .input_tarefa {
-    input {
-        width: 500px;
-        height: auto;
-        font-size: 14px;
+    mat-form-field {
+        width: 100%;
     }
 }
 
-.input_vencimento {
+.input_vencimento_botoes {
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .botoes_cancelar_confirmar {
     display: flex;
-    justify-content: center;
-    gap: 2rem;
+    justify-content: space-around;
+    gap: 1rem;
+
+    .customSizeIcon {
+        font-size: 50px;
+        height: 50px ;
+        width: 50px;
+    }
 }
