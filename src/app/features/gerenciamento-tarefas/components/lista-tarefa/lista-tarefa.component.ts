@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Tarefa } from '../../api/models/tarefa.interface';
 import { GerenciamentoTarefaStorageService } from '../../service/gerenciamento-tarefa.service';
 import { Observable, delay } from 'rxjs';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-lista-tarefa',
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class ListaTarefaComponent implements OnInit {
 
-    public displayedColumns: string[] = ['concluir', 'descricao', 'dataVencimento', 'editar', 'deletar'];
+    public displayedColumns: string[] = ['status', 'descricao', 'dataVencimento', 'editar', 'deletar', 'mudarStatus'];
     public listaTarefas$: Observable<Tarefa[]>;
 
     constructor(
@@ -44,7 +44,7 @@ export class ListaTarefaComponent implements OnInit {
         this.irParaAdicionarTarefa();
     }
 
-    public concluirTarefa(index: number): void {
-        this.gerenciamentoTarefaStorageService.concluirTarefa(index);
+    public alterarStatusTarefa(index: number): void {
+        this.gerenciamentoTarefaStorageService.alterarStatusTarefa(index);
     }
 }

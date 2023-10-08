@@ -1,6 +1,7 @@
-import { GerenciamentoTarefaStorageService } from './../../service/gerenciamento-tarefa.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { GerenciamentoTarefaStorageService } from './../../service/gerenciamento-tarefa.service';
 import { Tarefa } from '../../api/models/tarefa.interface';
 import * as moment from 'moment';
 

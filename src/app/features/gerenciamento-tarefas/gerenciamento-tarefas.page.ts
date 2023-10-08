@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-gerenciamento-tarefas',
-  templateUrl: './gerenciamento-tarefas.page.html',
-  styleUrls: ['./gerenciamento-tarefas.page.scss']
+    selector: 'app-gerenciamento-tarefas',
+    templateUrl: './gerenciamento-tarefas.page.html',
+    styleUrls: ['./gerenciamento-tarefas.page.scss']
 })
 export class GerenciamentoTarefasPage implements OnInit {
 
-  constructor() { }
+    constructor() { }
 
-  ngOnInit() {}
+    ngOnInit() { }
 
 }

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+
 import { Tarefa } from '../api/models/tarefa.interface';
 import { BehaviorSubject } from 'rxjs';
 
@@ -46,7 +47,7 @@ export class GerenciamentoTarefaStorageService {
         this.setListaTarefas(state);
     }
 
-    public concluirTarefa(index: number): void {
+    public alterarStatusTarefa(index: number): void {
         const state = this.storeValue.listaTarefas$.value;
         state[index].finalizada = !state[index].finalizada;
         this.setListaTarefas(state);

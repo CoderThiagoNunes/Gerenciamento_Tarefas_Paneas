@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { AdicionarComponent } from '../components/adicionar/adicionar.component';
 import { EditarComponent } from '../components/editar/editar.component';
 import { GerenciamentoTarefasPage } from '../gerenciamento-tarefas.page';
