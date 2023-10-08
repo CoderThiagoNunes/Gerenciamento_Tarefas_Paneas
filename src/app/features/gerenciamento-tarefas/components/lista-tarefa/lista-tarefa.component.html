@@ -1,24 +1,51 @@
 <div class="example-container mat-elevation-z8">
     <ng-container *ngIf="(listaTarefas$ | async) as listaTarefas; else loading">
         <ng-container *ngIf="(listaTarefas.length > 0); else semTarefas">
-            <table mat-table [dataSource]="listaTarefas">
+            <table mat-table [dataSource]="listaTarefas$">
+            <!-- coluna finalizar -->
+                <ng-container matColumnDef="concluir">
+                    <th mat-header-cell *matHeaderCellDef> Concluir </th>
+                    <td mat-cell *matCellDef="let tarefa; let i = index">
+                        <ng-container *ngIf="tarefa.finalizada">
+                            <mat-icon color="primary">check_circle_outline</mat-icon>
+                        </ng-container>
+                        <ng-container *ngIf="!tarefa.finalizada">
+                            <button mat-icon-button color="primary">
+                                <mat-icon (click)="concluirTarefa(i)">hourglass_empty</mat-icon>
+                            </button>
+                        </ng-container>
+                    </td>
+                </ng-container>
             <!-- coluna descricao -->
                 <ng-container matColumnDef="descricao">
                     <th mat-header-cell *matHeaderCellDef> Descrição </th>
-                    <td mat-cell *matCellDef="let tarefa; let i = index"> {{tarefa.descricao}} </td>
+                    <td mat-cell *matCellDef="let tarefa; let i = index">
+                        <div [ngClass]="{'tarefa_finalizada' : tarefa.finalizada === true}">
+                            {{tarefa.descricao}} 
+                        </div>
+                    </td>
                 </ng-container>
             <!-- coluna data de vencimento -->
                 <ng-container matColumnDef="dataVencimento">
                     <th mat-header-cell *matHeaderCellDef> Data de Vencimento </th>
-                    <td mat-cell *matCellDef="let tarefa; let i = index"> {{tarefa.dataVencimento}} </td>
+                    <td mat-cell *matCellDef="let tarefa; let i = index">
+                        <div [ngClass]="{'tarefa_finalizada' : tarefa.finalizada === true}">
+                            {{tarefa.dataVencimento}}
+                        </div>
+                    </td>
                 </ng-container>
             <!-- coluna editar -->
                 <ng-container matColumnDef="editar">
                     <th mat-header-cell *matHeaderCellDef> Editar </th>
-                    <td mat-cell *matCellDef="let tarefa">
-                        <button mat-icon-button color="primary">
-                            <mat-icon>edit</mat-icon>
-                        </button>
+                    <td mat-cell *matCellDef="let tarefa; let i = index">
+                        <ng-container *ngIf="!tarefa.finalizada">
+                            <button mat-icon-button color="primary">
+                                <mat-icon (click)="irParaEditarTarefa(i)">create</mat-icon>
+                            </button>
+                        </ng-container>
+                        <ng-container *ngIf="tarefa.finalizada">
+                            <mat-icon color="primary">minimize</mat-icon>
+                        </ng-container>
                     </td>
                 </ng-container>
             <!-- coluna deletar -->
@@ -26,7 +53,7 @@
                     <th mat-header-cell *matHeaderCellDef> Excluir </th>
                     <td mat-cell *matCellDef="let tarefa; let i = index">
                         <button mat-icon-button color="primary">
-                            <mat-icon (click)="excluirTarefa(i)">delete</mat-icon>
+                            <mat-icon (click)="excluirTarefa(i)">delete_outline</mat-icon>
                         </button>
                     </td>
                 </ng-container>
@@ -45,8 +72,7 @@
 
 <ng-template #semTarefas>
     <div class="loading_e_sem_tarefas">
-        <h2>OPS... NÃO EXISTEM TAREFAS CADASTRADAS...</h2>\
         <img src="../../../../../assets/aviso.png">
+        <h2>OPS... NÃO EXISTEM TAREFAS CADASTRADAS...</h2>
     </div>
 </ng-template>
-

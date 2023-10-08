@@ -1,3 +1,39 @@
-<div class="editar_tarefa">
-  <p>EDITAR</p>
-</div>
+<mat-card class="card_adicionar_tarefa">
+    <mat-toolbar color="primary">Editar tarefa</mat-toolbar>
+    <form [formGroup]="formGerenciamentoTarefa">
+        <div class="inputs_tarefa_vencimento">
+            <div class="input_tarefa">
+                <mat-form-field appearance="fill">
+                    <mat-label>Descreva uma tarefa: </mat-label>
+                    <input
+                        matInput
+                        formControlName="descricao"
+                    >
+                    <mat-error *ngIf="formGerenciamentoTarefa.get('descricao')?.errors && formGerenciamentoTarefa.get('descricao')?.touched">{{ 'Campo obrigatório!' }}</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="input_vencimento_botoes">
+                <div>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Escolha uma data de vencimento</mat-label>
+                        <input
+                            #inputDataVencimento
+                            matInput [matDatepicker]="picker"
+                            formControlName="vencimento"
+                        >
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-error *ngIf="formGerenciamentoTarefa.get('vencimento')?.errors && formGerenciamentoTarefa.get('vencimento')?.touched">{{ 'Campo obrigatório!' }}</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div>
+                <div class="botoes_cancelar_confirmar">
+                    <button mat-raised-button color="warn" (click)="irParaAdicionarTarefa()">Cancelar</button>
+                    <button mat-raised-button color="primary" (click)="updateTarefa()" [disabled]="!formGerenciamentoTarefa.valid">Atualizar tarefa</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</mat-card>

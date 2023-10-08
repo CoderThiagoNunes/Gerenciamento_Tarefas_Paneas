@@ -1,41 +1,61 @@
 import { Injectable } from '@angular/core';
 import { Tarefa } from '../api/models/tarefa.interface';
-import { Observable, delay, of, tap } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+
+export interface State {
+    listaTarefas$: BehaviorSubject<Tarefa[]>;
+}
+
+const inicialState: State = {
+    listaTarefas$: new BehaviorSubject<Tarefa[]>([])
+};
 
 @Injectable({
     providedIn: 'root'
 })
 export class GerenciamentoTarefaStorageService {
 
-    constructor() {}
+    private readonly subject = new BehaviorSubject<State>(inicialState);
 
-    public getListaTarefas(): Observable<Tarefa[]> {
-        return of<Tarefa[]>(JSON.parse(localStorage.getItem('tarefa') as string)as Tarefa[]).pipe(
-            delay(2000),
-            tap(res => console.log(res))
-        )
+    constructor() {
+        if(localStorage.getItem('tarefa')) {
+            inicialState.listaTarefas$.next(JSON.parse(localStorage.getItem('tarefa') as string))
+        }
     }
 
-    public setListaTarefas(tarefas: Tarefa[]) {
-        localStorage.setItem('tarefa', JSON.stringify(tarefas));
+    get storeValue(): State {
+        return this.subject.value;
     }
 
-    public addTarefa(tarefa: Tarefa): void {
-        // let listaTarefas: Tarefa[] = this.getListaTarefas('tarefa');
-        // listaTarefas.push(tarefa);
-        // this.setListaTarefas('tarefa', listaTarefas);
+    public addTarefa(novaTarefa: Tarefa): void {
+        const state = this.storeValue.listaTarefas$.value;
+        state.push(novaTarefa);
+        this.setListaTarefas(state);
     }
 
-    // public updateTarefa(tarefa: Tarefa, changes: any): void {
-    //     const index = this.listaTarefas.indexOf(tarefa);
-    //     this.listaTarefas[index] = { ...tarefa, ...changes };
-    //     this.setListaTarefas('tarefa', this.listaTarefas);
-    // }
+    public updateTarefa(tarefa: Tarefa, index: number): void {
+        const state = this.storeValue.listaTarefas$.value;
+        state[index].descricao = tarefa.descricao;
+        state[index].dataVencimento = tarefa.dataVencimento;
+        this.setListaTarefas(state);
+    }
 
     public deleteTarefa(index: number): void {
-        // let listaTarefas: Tarefa[] = this.getListaTarefas('tarefa');
-        // listaTarefas.splice(index, 1);
-        // this.setListaTarefas('tarefa', listaTarefas);
+        const state = this.storeValue.listaTarefas$.value;
+        state.splice(index, 1);
+        this.setListaTarefas(state);
     }
 
+    public concluirTarefa(index: number): void {
+        const state = this.storeValue.listaTarefas$.value;
+        state[index].finalizada = !state[index].finalizada;
+        this.setListaTarefas(state);
+    }
+    
+    public setListaTarefas(tarefas: Tarefa[]): void {
+        const state = this.storeValue.listaTarefas$;
+        state.next(tarefas);
+        localStorage.setItem('tarefa', JSON.stringify(tarefas));
+        console.log(state.value)
+    }
 }
