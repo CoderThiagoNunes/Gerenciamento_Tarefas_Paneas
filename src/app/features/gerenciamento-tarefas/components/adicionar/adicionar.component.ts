@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GerenciamentoTarefaStorageService } from './../../service/gerenciamento-tarefa.service';
 import { Tarefa } from '../../api/models/tarefa.interface';
 import * as moment from 'moment';
+import { DateValidator } from 'src/app/shared/validators/date.validator';
 
 @Component({
     selector: 'app-adicionar',
@@ -26,7 +27,7 @@ export class AdicionarComponent implements OnInit {
     public criarFormGerenciamentoTarefa(): void {
         this.formGerenciamentoTarefa = this.formBuilder.group({
             descricao: [null, [Validators.required]],
-            vencimento: [null, [Validators.required]],
+            vencimento: [null, [Validators.required, DateValidator]],
         });
     }
 

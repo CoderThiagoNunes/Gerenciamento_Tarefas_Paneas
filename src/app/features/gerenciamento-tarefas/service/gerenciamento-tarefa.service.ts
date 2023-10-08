@@ -57,6 +57,5 @@ export class GerenciamentoTarefaStorageService {
         const state = this.storeValue.listaTarefas$;
         state.next(tarefas);
         localStorage.setItem('tarefa', JSON.stringify(tarefas));
-        console.log(state.value)
     }
 }

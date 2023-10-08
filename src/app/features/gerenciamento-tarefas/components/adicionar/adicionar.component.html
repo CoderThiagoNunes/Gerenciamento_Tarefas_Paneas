@@ -24,7 +24,8 @@
                         <mat-hint>MM/DD/YYYY</mat-hint>
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
-                        <mat-error *ngIf="formGerenciamentoTarefa.get('vencimento')?.errors && formGerenciamentoTarefa.get('vencimento')?.touched">{{ 'Campo obrigatório!' }}</mat-error>
+                        <mat-error *ngIf="formGerenciamentoTarefa.get('vencimento')?.errors?.['required'] && formGerenciamentoTarefa.get('vencimento')?.touched">{{ 'Campo obrigatório!' }}</mat-error>
+                        <mat-error *ngIf="formGerenciamentoTarefa.get('vencimento')?.errors?.['dataValida'] && formGerenciamentoTarefa.get('vencimento')?.touched">{{ 'Selecione uma data superior ao dia atual...' }}</mat-error>
                     </mat-form-field>
                 </div>
             </div>
